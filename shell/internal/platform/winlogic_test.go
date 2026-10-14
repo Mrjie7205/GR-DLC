@@ -1,3 +1,4 @@
+// Modified for GR-DLC on 2026-10-15: independent branding and packaging; inherited notices retained.
 package platform
 
 import (
@@ -174,15 +175,15 @@ func TestDataDirFor(t *testing.T) {
 		home string
 		want string
 	}{
-		{"windows", map[string]string{"LOCALAPPDATA": `C:\Users\me\AppData\Local`}, "", `C:\Users\me\AppData\Local\GRMod`},
-		{"windows", map[string]string{"LOCALAPPDATA": `C:\Users\me\AppData\Local\`}, "", `C:\Users\me\AppData\Local\GRMod`},
-		{"windows", map[string]string{"USERPROFILE": `C:\Users\me`}, "", `C:\Users\me\AppData\Local\GRMod`},
+		{"windows", map[string]string{"LOCALAPPDATA": `C:\Users\me\AppData\Local`}, "", `C:\Users\me\AppData\Local\GR-DLC`},
+		{"windows", map[string]string{"LOCALAPPDATA": `C:\Users\me\AppData\Local\`}, "", `C:\Users\me\AppData\Local\GR-DLC`},
+		{"windows", map[string]string{"USERPROFILE": `C:\Users\me`}, "", `C:\Users\me\AppData\Local\GR-DLC`},
 		{"windows", map[string]string{}, `C:\Users\me`, ""},
-		{"linux", map[string]string{"XDG_DATA_HOME": "/data/xdg"}, "/home/me", "/data/xdg/grmod"},
-		{"linux", map[string]string{"XDG_DATA_HOME": "/data/xdg/"}, "/home/me", "/data/xdg/grmod"},
-		{"linux", map[string]string{"XDG_DATA_HOME": "relative"}, "/home/me", "/home/me/.local/share/grmod"}, // must be absolute per the XDG spec
-		{"linux", map[string]string{}, "/home/me", "/home/me/.local/share/grmod"},
-		{"darwin", map[string]string{}, "/Users/me/", "/Users/me/Library/Application Support/GR Mod"},
+		{"linux", map[string]string{"XDG_DATA_HOME": "/data/xdg"}, "/home/me", "/data/xdg/gr-dlc"},
+		{"linux", map[string]string{"XDG_DATA_HOME": "/data/xdg/"}, "/home/me", "/data/xdg/gr-dlc"},
+		{"linux", map[string]string{"XDG_DATA_HOME": "relative"}, "/home/me", "/home/me/.local/share/gr-dlc"}, // must be absolute per the XDG spec
+		{"linux", map[string]string{}, "/home/me", "/home/me/.local/share/gr-dlc"},
+		{"darwin", map[string]string{}, "/Users/me/", "/Users/me/Library/Application Support/GR-DLC"},
 		{"linux", map[string]string{}, "", ""},
 	}
 	for _, c := range cases {

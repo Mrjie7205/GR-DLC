@@ -1,3 +1,4 @@
+// Modified for GR-DLC on 2026-10-15: independent branding and packaging; inherited notices retained.
 package main
 
 import (
@@ -148,7 +149,7 @@ func (a *app) start(host platform.Host) error {
 			a.log.Printf("http server stopped: %v", err)
 		}
 	}()
-	a.log.Printf("grmod %s (%s/%s, %s) serving %s, ui: %s, data: %s",
+	a.log.Printf("gr-dlc %s (%s/%s, %s) serving %s, ui: %s, data: %s",
 		version, runtime.GOOS, runtime.GOARCH, host.Kind(), a.url, a.webName, a.dataDir)
 	return nil
 }

@@ -1,0 +1,10 @@
+name: 功能建议 / Feature request
+description: 说明想解决的问题与目标机型 / Suggest an improvement
+body:
+  - type: textarea
+    id: request
+    attributes:
+      label: 希望实现什么 / What would you like to do?
+      description: 请说明机型、使用场景；参考其他项目时附上链接。
+    validations:
+      required: true

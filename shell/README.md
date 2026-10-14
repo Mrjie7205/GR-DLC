@@ -1,11 +1,11 @@
-# GR Mod shell
+# GR-DLC shell
 
-A small desktop shell for the GR Mod web UI, written in pure Go (no cgo).
+A small desktop shell for the GR-DLC web UI, written in pure Go (no cgo).
 
-macOS: build the UI, then run `./build.sh macos`; copy `dist/GR Mod.app` to
+macOS: build the UI, then run `./build.sh macos`; copy `dist/GR-DLC.app` to
 `~/Applications`. The app opens its loopback-only UI in the default browser, uses
 native folder selection and Finder, and discovers SD cards including the built-in
-reader. macOS storage defaults to `~/Library/Application Support/GR Mod`. It stops
+reader. macOS storage defaults to `~/Library/Application Support/GR-DLC`. It stops
 after two minutes without an API heartbeat (three minutes if never opened).
 `GRMOD_HEADLESS=1` suppresses browser launch for local tests. The signed bundle
 is ad-hoc signed for local use, not an upstream notarized release.
@@ -18,8 +18,8 @@ is ad-hoc signed for local use, not an upstream notarized release.
 ## Build
 
 ```sh
-./build.sh dev        # dist/grmod-dev   Linux, headless
-./build.sh windows    # dist/GRMod.exe   Windows x64, single file, no console window
+./build.sh dev        # dist/gr-dlc-dev   Linux, headless
+./build.sh windows    # dist/GR-DLC.exe   Windows x64, single file, no console window
 ./build.sh all
 ```
 
@@ -45,7 +45,7 @@ GOOS=windows GOARCH=amd64 go vet ./...          # the Windows build compiles and
 | `--port N` | Listen on port N of 127.0.0.1. Default: the port of the previous run if it is free, else a free port. |
 | `--token T` | Use T as the API token. Default: 32 random hex characters per run. |
 | `--web DIR` | Serve the UI from DIR on disk instead of the embedded files (development). |
-| `--data DIR` | Data directory. Default: `%LOCALAPPDATA%\GRMod` on Windows, `$XDG_DATA_HOME/grmod` or `~/.local/share/grmod` elsewhere. |
+| `--data DIR` | Data directory. Default: `%LOCALAPPDATA%\GR-DLC` on Windows, `$XDG_DATA_HOME/gr-dlc` or `~/.local/share/gr-dlc` elsewhere. |
 | `--browser` | Windows: skip WebView2 and open the UI in Edge app mode (or the default browser). |
 | `--devtools` | Windows: enable the developer tools and the context menu in the WebView2 window. |
 | `--version` | Print the version and exit. |
@@ -155,16 +155,16 @@ winres/                icon PNGs and resource description; placeholder/ the plac
 
 ### Why two processes at start-up on Windows
 
-The WebView2 binding ends the process (`log.Fatal`) when the browser environment or controller cannot be created, and a crash in native WebView2 code does the same; neither can be caught. So `GRMod.exe` starts itself again with `--webview-worker`. The worker runs the server and the window; as soon as the window exists it says so and the first process exits. If the worker dies or stays silent for 60 s instead, the first process runs the Edge / default-browser fallback itself.
+The WebView2 binding ends the process (`log.Fatal`) when the browser environment or controller cannot be created, and a crash in native WebView2 code does the same; neither can be caught. So `GR-DLC.exe` starts itself again with `--webview-worker`. The worker runs the server and the window; as soon as the window exists it says so and the first process exits. If the worker dies or stays silent for 60 s instead, the first process runs the Edge / default-browser fallback itself.
 
 ## Checking the Windows build on a real PC
 
 Nothing Windows-specific can be executed on the Linux build machine. Things to verify by hand:
 
-1. Double-click `GRMod.exe`: a window titled "GR Mod" opens centred, about 1180×800 at 100 % scaling (scaled up on high-DPI displays), cannot be made smaller than 980×640, has the icon, and shows the UI. Task Manager shows one `GRMod.exe` once the window is up. Closing the window ends the process.
+1. Double-click `GR-DLC.exe`: a window titled "GR-DLC" opens centred, about 1180×800 at 100 % scaling (scaled up on high-DPI displays), cannot be made smaller than 980×640, has the icon, and shows the UI. Task Manager shows one `GR-DLC.exe` once the window is up. Closing the window ends the process.
 2. Storage written by the page (`localStorage`) is still there after a restart.
-3. `GRMod.exe --browser`: Edge opens an app window; the process ends about 15 s after that window is closed.
-4. WebView2 failure: test on a PC without the WebView2 runtime, or make `%LOCALAPPDATA%\GRMod\webview` unusable (replace the folder by a file; separately, deny write access to it). Edge app mode must open instead, within a few seconds.
+3. `GR-DLC.exe --browser`: Edge opens an app window; the process ends about 15 s after that window is closed.
+4. WebView2 failure: test on a PC without the WebView2 runtime, or make `%LOCALAPPDATA%\GR-DLC\webview` unusable (replace the folder by a file; separately, deny write access to it). Edge app mode must open instead, within a few seconds.
 5. Insert an SD card: `GET /api/volumes` lists it with label, file system, sizes and bus (`SD` or `USB`); the system drive never appears, also not with `all=1`. An empty card reader produces no error dialog.
 6. Write a file to the card through the UI and compare its SHA-256 on another machine; overwrite it; move it.
 7. Folder picker: the dialog opens in front of the window and the returned folder becomes usable.

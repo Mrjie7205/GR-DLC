@@ -1,5 +1,6 @@
 //go:build darwin
 
+// Modified for GR-DLC on 2026-10-15: independent branding and packaging; inherited notices retained.
 package main
 
 import (
@@ -17,7 +18,7 @@ import (
 // macOS uses the local browser for the UI and native file/SD card operations.
 func runPlatform(a *app) int {
 	if err := a.start(platform.New()); err != nil {
-		fatalMessage("GR Mod cannot start: " + err.Error())
+		fatalMessage("GR-DLC cannot start: " + err.Error())
 		return 1
 	}
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
@@ -28,7 +29,7 @@ func runPlatform(a *app) int {
 	} else {
 		a.srv.Heartbeat().Restart()
 		if err := exec.Command("/usr/bin/open", a.url).Run(); err != nil {
-			fatalMessage("Cannot open GR Mod: " + err.Error())
+			fatalMessage("Cannot open GR-DLC: " + err.Error())
 			return 1
 		}
 		// Background browser tabs can throttle timers; allow two minutes.
@@ -38,4 +39,4 @@ func runPlatform(a *app) int {
 	return 0
 }
 
-func fatalMessage(msg string) { fmt.Fprintln(os.Stderr, "grmod: "+msg) }
+func fatalMessage(msg string) { fmt.Fprintln(os.Stderr, "gr-dlc: "+msg) }

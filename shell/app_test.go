@@ -1,5 +1,6 @@
 //go:build !windows
 
+// Modified for GR-DLC on 2026-10-15: independent branding and packaging; inherited notices retained.
 package main
 
 import (
@@ -76,7 +77,7 @@ func TestAppEndToEnd(t *testing.T) {
 
 	// The embedded placeholder page and host.js.
 	code, hdr, body := request(t, "GET", a.url, "", nil)
-	if code != 200 || !strings.Contains(string(body), "<title>GR Mod</title>") || hdr.Get("Cache-Control") != "no-store" {
+	if code != 200 || !strings.Contains(string(body), "<title>GR-DLC</title>") || hdr.Get("Cache-Control") != "no-store" {
 		t.Errorf("GET /: %d, Cache-Control %q", code, hdr.Get("Cache-Control"))
 	}
 	code, _, body = request(t, "GET", api+"/host.js", "", nil)
@@ -217,7 +218,7 @@ func TestDefaultDataDirFollowsXDG(t *testing.T) {
 		t.Fatal(err)
 	}
 	defer a.close()
-	if a.dataDir != filepath.Join(xdg, "grmod") {
+	if a.dataDir != filepath.Join(xdg, "gr-dlc") {
 		t.Errorf("data dir = %q", a.dataDir)
 	}
 }

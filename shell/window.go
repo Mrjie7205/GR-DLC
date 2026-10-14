@@ -1,8 +1,9 @@
+// Modified for GR-DLC on 2026-10-15: independent branding and packaging; inherited notices retained.
 package main
 
 // Design sizes of the window, in device-independent pixels (96 per inch).
 const (
-	windowTitle     = "GR Mod"
+	windowTitle     = "GR-DLC"
 	windowWidth     = 1180
 	windowHeight    = 800
 	windowMinWidth  = 980

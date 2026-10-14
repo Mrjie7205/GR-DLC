@@ -1,5 +1,6 @@
 //go:build !windows && !darwin
 
+// Modified for GR-DLC on 2026-10-15: independent branding and packaging; inherited notices retained.
 package main
 
 import (
@@ -17,7 +18,7 @@ import (
 func runPlatform(a *app) int {
 	if err := a.start(platform.New()); err != nil {
 		a.log.Printf("startup failed: %v", err)
-		fatalMessage("GR Mod cannot start: " + err.Error())
+		fatalMessage("GR-DLC cannot start: " + err.Error())
 		return 1
 	}
 	fmt.Printf("LISTEN %s TOKEN %s\n", a.url, a.token)
@@ -31,5 +32,5 @@ func runPlatform(a *app) int {
 }
 
 func fatalMessage(msg string) {
-	fmt.Fprintln(os.Stderr, "grmod: "+msg)
+	fmt.Fprintln(os.Stderr, "gr-dlc: "+msg)
 }

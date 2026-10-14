@@ -1,12 +1,24 @@
 {
-  "name": "grmod",
+  "name": "gr-dlc",
   "private": true,
-  "version": "0.6.4-film120-jpg-w2",
+  "version": "0.1.0",
   "license": "GPL-2.0-only",
   "type": "module",
-  "workspaces": ["core", "ui"],
+  "workspaces": [
+    "core",
+    "ui"
+  ],
   "scripts": {
     "test": "npm -w core test",
     "build": "npm -w ui run build"
+  },
+  "description": "Open-source expansion toolkit for Ricoh GR cameras",
+  "homepage": "https://github.com/Mrjie7205/GR-DLC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mrjie7205/GR-DLC.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Mrjie7205/GR-DLC/issues"
   }
 }

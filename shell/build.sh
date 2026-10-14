@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
-# Builds the GR Mod shell.
+# Modified for GR-DLC on 2026-10-15: independent branding and packaging; inherited notices retained.
+# Builds the GR-DLC shell.
 #
-#   ./build.sh dev       -> dist/grmod-dev   (Linux, headless, for development and tests)
-#   ./build.sh windows   -> dist/GRMod.exe   (Windows x64, single file, no console)
-#   ./build.sh macos     -> dist/GR Mod.app (native architecture, local browser UI)
+#   ./build.sh dev       -> dist/gr-dlc-dev   (Linux, headless, for development and tests)
+#   ./build.sh windows   -> dist/GR-DLC.exe   (Windows x64, single file, no console)
+#   ./build.sh macos     -> dist/GR-DLC.app (native architecture, local browser UI)
 #   ./build.sh all       -> both
 #
 # The version comes from $VERSION, else from ../package.json, else 0.0.0.
@@ -50,8 +51,8 @@ mkdir -p dist
 build_dev() {
   CGO_ENABLED=0 GOOS=linux go build -trimpath \
     -ldflags "-X main.version=${version}" \
-    -o dist/grmod-dev .
-  echo "built:   dist/grmod-dev ($(wc -c < dist/grmod-dev | tr -d ' ') bytes, version ${version})"
+    -o dist/gr-dlc-dev .
+  echo "built:   dist/gr-dlc-dev ($(wc -c < dist/gr-dlc-dev | tr -d ' ') bytes, version ${version})"
 }
 
 # make_resources (re)generates rsrc_windows_amd64.syso, the object file that
@@ -82,27 +83,27 @@ build_windows() {
   make_resources
   GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go build -trimpath \
     -ldflags "-H windowsgui -s -w -X main.version=${version}" \
-    -o dist/GRMod.exe .
-  echo "built:   dist/GRMod.exe ($(wc -c < dist/GRMod.exe | tr -d ' ') bytes, version ${version})"
+    -o dist/GR-DLC.exe .
+  echo "built:   dist/GR-DLC.exe ($(wc -c < dist/GR-DLC.exe | tr -d ' ') bytes, version ${version})"
   if command -v sha256sum >/dev/null 2>&1; then
-    echo "sha256:  $(sha256sum dist/GRMod.exe | cut -d' ' -f1)"
+    echo "sha256:  $(sha256sum dist/GR-DLC.exe | cut -d' ' -f1)"
   fi
 }
 
 build_macos() {
   [ "$(uname -s)" = Darwin ] || { echo 'macos packaging requires macOS' >&2; exit 2; }
-  local bundle='dist/GR Mod.app'
+  local bundle='dist/GR-DLC.app'
   mkdir -p "$bundle/Contents/MacOS" "$bundle/Contents/Resources"
   CGO_ENABLED=0 GOOS=darwin go build -trimpath \
-    -ldflags "-s -w -X main.version=${version}" -o "$bundle/Contents/MacOS/grmod" .
+    -ldflags "-s -w -X main.version=${version}" -o "$bundle/Contents/MacOS/gr-dlc" .
   cat > "$bundle/Contents/Info.plist" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0"><dict>
-<key>CFBundleIdentifier</key><string>io.github.maxwooow.grmod.local-gr3x</string>
-<key>CFBundleName</key><string>GR Mod</string>
-<key>CFBundleDisplayName</key><string>GR Mod</string>
-<key>CFBundleExecutable</key><string>grmod</string>
+<key>CFBundleIdentifier</key><string>io.github.mrjie7205.gr-dlc</string>
+<key>CFBundleName</key><string>GR-DLC</string>
+<key>CFBundleDisplayName</key><string>GR-DLC</string>
+<key>CFBundleExecutable</key><string>gr-dlc</string>
 <key>CFBundlePackageType</key><string>APPL</string>
 <key>CFBundleVersion</key><string>${version}</string>
 <key>CFBundleShortVersionString</key><string>${version%%-*}</string>
@@ -119,6 +120,8 @@ EOF
   done
   iconutil -c icns "$icons" -o "$bundle/Contents/Resources/AppIcon.icns"
   cp ../LICENSE "$bundle/Contents/Resources/LICENSE.txt"
+  cp ../CREDITS.md "$bundle/Contents/Resources/CREDITS.md"
+  cp ../README.md "$bundle/Contents/Resources/README.md"
   cp ../docs/GR3X_ADJ9_TEST.txt "$bundle/Contents/Resources/ADJ9-T4.txt"
   cp ../docs/GR3X_FEATURES_TEST.txt "$bundle/Contents/Resources/GR3x-T4F1.txt"
   cp ../docs/GR3X_T5_TEST.txt "$bundle/Contents/Resources/GR3x-T5.txt"

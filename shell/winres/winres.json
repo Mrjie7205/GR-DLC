@@ -13,10 +13,10 @@
     "#1": {
       "0409": {
         "identity": {
-          "name": "GRMod",
+          "name": "GR-DLC",
           "version": "0.0.0.0"
         },
-        "description": "GR Mod",
+        "description": "GR-DLC",
         "minimum-os": "win10",
         "execution-level": "as invoker",
         "ui-access": false,
@@ -43,10 +43,10 @@
         },
         "info": {
           "0409": {
-            "FileDescription": "GR Mod",
-            "InternalName": "GRMod",
-            "OriginalFilename": "GRMod.exe",
-            "ProductName": "GR Mod",
+            "FileDescription": "GR-DLC",
+            "InternalName": "GR-DLC",
+            "OriginalFilename": "GR-DLC.exe",
+            "ProductName": "GR-DLC",
             "FileVersion": "",
             "ProductVersion": ""
           }

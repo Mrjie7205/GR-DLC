@@ -1,3 +1,4 @@
+// Modified for GR-DLC on 2026-10-15: independent branding and packaging; inherited notices retained.
 import { LANGS } from '@grmod/core';
 import type { CameraModel, LangCode } from '@grmod/core';
 import { useRef, useState } from 'react';
@@ -23,6 +24,7 @@ function Sidebar() {
   const [about, setAbout] = useState(false);
   return (
     <aside className="sidebar">
+      <div className="side-brand">GR-DLC<small>{t('appTagline')}</small></div>
       <nav>
         <button className={`nav ${page === 'script' ? 'on' : ''}`} data-tour="nav-script" onClick={() => setPage('script')}>{Ico.tool}<span>{t('navScript')}</span></button>
         <button className={`nav ${page === 'ic' ? 'on' : ''}`} data-tour="nav-ic" onClick={() => setPage('ic')}>{Ico.aperture}<span>{t('navIC')}</span></button>
@@ -51,9 +53,10 @@ function Sidebar() {
       {about && (
         <div className="overlay" onMouseDown={(e) => { if (e.target === e.currentTarget) setAbout(false); }}>
           <div className="dialog about" role="dialog" aria-modal="true">
-            <h3>GR Mod <small>v{host.info?.version}</small></h3>
+            <h3>GR-DLC <small>v{host.info?.version}</small></h3>
             <p>{t('aboutBody')}</p>
             <p className="muted small">{t('aboutCredits')}</p>
+            <p className="about-sources"><a href="https://github.com/Mrjie7205/GR-DLC" target="_blank" rel="noreferrer">GitHub</a> · <a href="https://github.com/Mrjie7205/GR-DLC/blob/main/CREDITS.md" target="_blank" rel="noreferrer">{t('sourcesLink')}</a> · <a href="https://github.com/Mrjie7205/GR-DLC/blob/main/LICENSE" target="_blank" rel="noreferrer">GPL-2.0-only</a></p>
             <div className="dialog-actions"><button className="btn" onClick={() => setAbout(false)}>{t('done')}</button></div>
           </div>
         </div>

@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
+# Modified for GR-DLC on 2026-10-15: independent branding and packaging; inherited notices retained.
 # End-to-end smoke test: starts the development build on a temporary
 # directory and exercises the HTTP API with curl.
 #
-#   ./build.sh dev && ./smoke.sh [path/to/grmod-dev]
+#   ./build.sh dev && ./smoke.sh [path/to/gr-dlc-dev]
 set -uo pipefail
 cd "$(dirname "$0")"
 
-bin="${1:-dist/grmod-dev}"
+bin="${1:-dist/gr-dlc-dev}"
 [ -x "$bin" ] || { echo "smoke: $bin not found; run ./build.sh dev first" >&2; exit 2; }
 
 work="$(mktemp -d)"

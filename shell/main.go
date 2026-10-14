@@ -1,4 +1,5 @@
-// Command grmod-shell is the desktop shell of GR Mod: it serves the web UI
+// Modified for GR-DLC on 2026-10-15: independent branding and packaging; inherited notices retained.
+// Command grmod-shell is the desktop shell of GR-DLC: it serves the web UI
 // from files embedded in the executable, shows it in a native window on
 // Windows and gives the page a small local HTTP API for what a web page
 // cannot do by itself (removable drives, file access on a memory card, a
@@ -46,7 +47,7 @@ const workerFlag = "webview-worker"
 
 func parseFlags(args []string, errOut io.Writer) (config, error) {
 	var c config
-	fs := flag.NewFlagSet("grmod", flag.ContinueOnError)
+	fs := flag.NewFlagSet("gr-dlc", flag.ContinueOnError)
 	fs.SetOutput(errOut)
 	fs.IntVar(&c.port, "port", 0, "listen on this TCP `port` of 127.0.0.1 instead of choosing a free one")
 	fs.StringVar(&c.token, "token", "", "use this API `token` instead of a random one")
@@ -99,12 +100,12 @@ func run(args []string) int {
 		return 2
 	}
 	if cfg.showVersion {
-		fmt.Println(strings.TrimSpace("grmod " + version))
+		fmt.Println(strings.TrimSpace("gr-dlc " + version))
 		return 0
 	}
 	a, err := newApp(cfg)
 	if err != nil {
-		fatalMessage("GR Mod cannot start: " + err.Error())
+		fatalMessage("GR-DLC cannot start: " + err.Error())
 		return 1
 	}
 	defer a.close()

@@ -1,3 +1,4 @@
+// Modified for GR-DLC on 2026-10-15: independent branding and packaging; inherited notices retained.
 // Package ricoh finds and downloads the current firmware update of a supported GR
 // model from RICOH IMAGING's own download pages.
 //
@@ -127,7 +128,7 @@ func (c *Client) get(ctx context.Context, base, u *url.URL) (*http.Response, err
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set("User-Agent", "GRMod")
+	req.Header.Set("User-Agent", "GR-DLC")
 	res, err := c.client().Do(req)
 	if err != nil {
 		return nil, err
@@ -324,7 +325,7 @@ func (c *Client) size(ctx context.Context, base, u *url.URL) int64 {
 		if err != nil {
 			return nil
 		}
-		req.Header.Set("User-Agent", "GRMod")
+		req.Header.Set("User-Agent", "GR-DLC")
 		if byteRange != "" {
 			req.Header.Set("Range", byteRange)
 		}

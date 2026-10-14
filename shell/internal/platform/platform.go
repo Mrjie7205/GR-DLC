@@ -1,3 +1,4 @@
+// Modified for GR-DLC on 2026-10-15: independent branding and packaging; inherited notices retained.
 // Package platform holds everything that differs between the Windows build
 // and the headless development build: volume enumeration, the folder picker,
 // the file manager, ejecting and the location of the data directory.
@@ -53,21 +54,21 @@ type Host interface {
 func DataDirFor(goos string, getenv func(string) string, home string) (string, error) {
 	if goos == "windows" {
 		if v := getenv("LOCALAPPDATA"); v != "" {
-			return strings.TrimRight(v, `\/`) + `\GRMod`, nil
+			return strings.TrimRight(v, `\/`) + `\GR-DLC`, nil
 		}
 		if v := getenv("USERPROFILE"); v != "" {
-			return strings.TrimRight(v, `\/`) + `\AppData\Local\GRMod`, nil
+			return strings.TrimRight(v, `\/`) + `\AppData\Local\GR-DLC`, nil
 		}
 		return "", errors.New("neither LOCALAPPDATA nor USERPROFILE is set")
 	}
 	if v := getenv("XDG_DATA_HOME"); strings.HasPrefix(v, "/") {
-		return strings.TrimRight(v, "/") + "/grmod", nil
+		return strings.TrimRight(v, "/") + "/gr-dlc", nil
 	}
 	if goos == "darwin" && strings.HasPrefix(home, "/") {
-		return strings.TrimRight(home, "/") + "/Library/Application Support/GR Mod", nil
+		return strings.TrimRight(home, "/") + "/Library/Application Support/GR-DLC", nil
 	}
 	if strings.HasPrefix(home, "/") {
-		return strings.TrimRight(home, "/") + "/.local/share/grmod", nil
+		return strings.TrimRight(home, "/") + "/.local/share/gr-dlc", nil
 	}
 	return "", errors.New("cannot determine the home directory")
 }

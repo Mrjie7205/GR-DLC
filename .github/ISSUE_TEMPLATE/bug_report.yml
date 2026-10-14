@@ -1,0 +1,34 @@
+name: 问题反馈 / Bug report
+description: 记录可复现的界面、导出或相机问题 / Report a reproducible problem
+body:
+  - type: input
+    id: version
+    attributes:
+      label: GR-DLC 版本 / App version
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: 机型、固件与电脑系统 / Camera, firmware and computer OS
+      placeholder: GR IIIx HDF 1.60 / macOS ...
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 操作步骤与使用的功能 / Steps and selected features
+      description: 请注明胶片、画幅、JPG/RAW、即时回放等有关设置。
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: 预期与实际结果 / Expected and observed behaviour
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 可选证据 / Optional evidence
+      description: 可贴截图或已去除隐私信息的自有样片。请勿上传完整固件、配置目录或未经授权的 LUT。

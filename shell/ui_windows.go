@@ -1,5 +1,6 @@
 //go:build windows
 
+// Modified for GR-DLC on 2026-10-15: independent branding and packaging; inherited notices retained.
 package main
 
 import (
@@ -138,7 +139,7 @@ func runBrowser(a *app) int {
 	host := platform.New()
 	if err := a.start(host); err != nil {
 		a.log.Printf("startup failed: %v", err)
-		fatalMessage("GR Mod cannot start: " + err.Error())
+		fatalMessage("GR-DLC cannot start: " + err.Error())
 		return 1
 	}
 	heartbeat := a.srv.Heartbeat()
@@ -162,7 +163,7 @@ func runBrowser(a *app) int {
 		cmd := exec.Command(rundll32, "url.dll,FileProtocolHandler", a.url)
 		if err := cmd.Start(); err != nil {
 			a.log.Printf("browser: cannot open the default browser: %v", err)
-			fatalMessage("GR Mod could not open a browser window.\n\nOpen this address in a browser within a minute to use it:\n\n" + a.url)
+			fatalMessage("GR-DLC could not open a browser window.\n\nOpen this address in a browser within a minute to use it:\n\n" + a.url)
 			heartbeat.Restart()
 		} else {
 			a.log.Printf("browser: opened the default browser")
